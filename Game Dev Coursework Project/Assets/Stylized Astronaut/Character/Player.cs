@@ -6,14 +6,17 @@ public class Player : MonoBehaviour {
 		private Animator anim;
 		private CharacterController controller;
 
+		Rigidbody rb;
 		public float speed = 600.0f;
 		public float turnSpeed = 400.0f;
 		private Vector3 moveDirection = Vector3.zero;
 		public float gravity = 20.0f;
-
+		public float jumpforce = 30.0f;
+		
 		void Start () {
 			controller = GetComponent <CharacterController>();
 			anim = gameObject.GetComponentInChildren<Animator>();
+			rb = GetComponent<Rigidbody>();
 		}
 
 		void Update (){
@@ -25,6 +28,11 @@ public class Player : MonoBehaviour {
 
 			if(controller.isGrounded){
 				moveDirection = transform.forward * Input.GetAxis("Vertical") * speed;
+			}
+
+			if (Input.GetKeyDown (KeyCode.Space)){
+				rb.AddForce(Vector3.up * jumpforce,ForceMode.Impulse);
+				
 			}
 
 			float turn = Input.GetAxis("Horizontal");

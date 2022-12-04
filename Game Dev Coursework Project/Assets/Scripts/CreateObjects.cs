@@ -7,11 +7,10 @@ public class CreateObjects : MonoBehaviour
     public Transform Spawnpoint;
     public GameObject Prefab;
 
-    void onTriggerEnter(Collider collider)
+    void OnTriggerEnter()
     {
-         if(collider.tag == "Block Trigger"){
-            Debug.Log("Collison");
-            Instantiate(Prefab, Spawnpoint);
-         }
+
+        Instantiate(Prefab, Spawnpoint.position, Spawnpoint.rotation);
+         
     }
 }
